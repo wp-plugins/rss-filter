@@ -1,8 +1,8 @@
 === RSS Filter ===
 Contributors: shambhu patnaik
 Donate link: http://aynsoft.com/
-Tags: RSS Filter,filter rss,rss,exclude category rss,exclude post rss,custom rss 
-Requires at least: 3.0.1
+Tags: RSS Filter,filter rss,rss,exclude category rss,exclude post rss,custom rss,sticky feed,sticky,sticky rss
+Requires at least: 2.9
 Tested up to: 3.7.1
 Stable tag: 1.0
 License: GPLv2 or later
