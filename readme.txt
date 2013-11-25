@@ -31,14 +31,16 @@ RSS Filter plugin .You have option to customization your WordPress RSS feed item
 == Frequently Asked Questions ==
 
 * **Only Sticky Post show in rss feed?**
+
  Show Only Sticky Post check box set to checked .if no sticky post found that it work default like
- ------
+
 * **How to Exclude Certain Categories From RSS Feed?**
-in Exclude Category text box enter category id (comma seperated)
- ------
+
+ In Exclude Category text box enter category id (comma seperated)
+
 * **How to Exclude Certain Post From RSS Feed?**
 
-in Exclude Post text box enter post id (comma seperated)
+ In Exclude Post text box enter post id (comma seperated)
 
 == Screenshots ==
 
