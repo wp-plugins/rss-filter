@@ -3,7 +3,7 @@ Contributors: shambhu patnaik
 Donate link: http://aynsoft.com/
 Tags: RSS Filter,filter rss,rss,exclude category rss,exclude post rss,custom rss,sticky feed,sticky,sticky rss
 Requires at least: 2.9
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,6 +18,8 @@ RSS Filter plugin .You have option to customization your WordPress RSS feed item
 2. sticky post show in your rss (feed).
 3. exclude any category in your WordPress rss (feed).
 4. exclude any post in your WordPress rss (feed).
+
+More Detail : http://socialcms.wordpress.com/
 
 
 == Installation ==
