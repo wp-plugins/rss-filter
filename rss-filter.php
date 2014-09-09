@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/rss-filter/
 Description: RSS Filter plugin .You have option to customization your WordPress RSS feed items.
 Version: 1.0
 Author: Shambhu Prasad Patnaik
-Author URI:http://aynsoft.com/
+Author URI:http://socialcms.wordpress.com/
 */
 
 
