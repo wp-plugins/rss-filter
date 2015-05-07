@@ -3,7 +3,7 @@
 Plugin Name: RSS Filter 
 Plugin URI: http://wordpress.org/extend/plugins/rss-filter/
 Description: RSS Filter plugin .You have option to customization your WordPress RSS feed items.
-Version: 1.0
+Version: 1.1
 Author: Shambhu Prasad Patnaik
 Author URI:http://socialcms.wordpress.com/
 */
@@ -31,10 +31,11 @@ function rss_filter_admin_setting()
  $action = stripslashes_deep($_POST['update']); 
  if($action=='Update')
  {
-  $show_sticky = stripslashes_deep($_POST['show_sticky']); 
+  $show_sticky      = stripslashes_deep($_POST['show_sticky']); 
   $exclude_category = stripslashes_deep($_POST['exclude_category']); 
-  $exclude_post = stripslashes_deep($_POST['exclude_post']); 
-  $rss_filter_setting =array('show_sticky'=>$show_sticky,'exclude_category'=>$exclude_category,'exclude_post'=>$exclude_post);
+  $exclude_post     = stripslashes_deep($_POST['exclude_post']); 
+  $author_post      = stripslashes_deep($_POST['author_post']); 
+  $rss_filter_setting =array('show_sticky'=>$show_sticky,'exclude_category'=>$exclude_category,'exclude_post'=>$exclude_post,'author_post'=>$author_post);
   $data=json_encode($rss_filter_setting);
   update_option('rss_filter_setting',$data); 
   update_option('rss_filter_message','Successfully Updated.');
@@ -47,6 +48,7 @@ function rss_filter_admin_setting()
   $show_sticky = $setting_data['show_sticky'];
   $exclude_category = $setting_data['exclude_category'];
   $exclude_post = $setting_data['exclude_post'];
+  $author_post= $setting_data['author_post'];
  }
  if($rss_filter_message = get_option('rss_filter_message') && !isset($_POST['update']))
  {
@@ -86,7 +88,13 @@ function rss_filter_admin_setting()
 	   </tr>
 	   <tr>
 		<td><input type="text" name="exclude_post"  value="'.$exclude_post.'" id="exclude_post" class="rssFilter_setting_input"><br><span class="rssFilter_setting_desc">Enter a comma seperated Post ID\'s. ex : <code>4,5,11</code> &nbsp;&nbsp;(Display latest post except these post).</span></td>
-	   </tr>	   
+	   </tr>
+	   <tr>
+		<td class="rssFilter_setting_title">Author  ID\'s</td>
+	   </tr>
+	   <tr>
+		<td><input type="text" name="author_post"  value="'.$author_post.'" id="author_post" class="rssFilter_setting_input"><br><span class="rssFilter_setting_desc">Enter a comma seperated author  ID\'s. ex : <code>1,2</code> &nbsp;&nbsp;(Display only these authors post).</span></td>
+	   </tr>
 	  </table><p class="submit"><input type="submit" name="update"value="Update" class="button button-primary button-large"></p></form>
      </div>';
 }
@@ -123,6 +131,9 @@ function rss_filter_help()
 	    3. <b>How to Exclude Certain Post From RSS Feed?</b><br>
          <p>in Exclude Post text box enter post id (comma seperated)</p><br>
 
+	    4. <b>How to given Author Post From RSS Feed?</b><br>
+         <p>in Author  ID\'s enter author id (comma seperated)</p><br>
+
      </div>';
 }
 endif;
@@ -133,6 +144,7 @@ function myFeedExcluder($query) {
   $setting_data = (array) json_decode(get_option('rss_filter_setting'));
   $exclude_category = explode(",",$setting_data['exclude_category']);
   $exclude_post = explode(",",$setting_data['exclude_post']);
+  $author_post = explode(",",$setting_data['author_post']);  
   $show_sticky = $setting_data['show_sticky'];
 
    if(count($exclude_category)>0)
@@ -141,6 +153,8 @@ function myFeedExcluder($query) {
    $query->set('post__not_in',$exclude_post);
    if($show_sticky=='yes')
    $query->set('post__in',get_option( 'sticky_posts' ));
+   if($author_post!='')
+   $query->set('author__in',$author_post);
    //print_r($query);die();
  }
 return $query;
@@ -159,7 +173,7 @@ endif;
 if (!function_exists('rss_filter_activate')) :
 function rss_filter_activate()
 {
- $rss_filter_setting =array('show_sticky'=>'','exclude_category'=>'','exclude_post'=>'');
+ $rss_filter_setting =array('show_sticky'=>'','exclude_category'=>'','exclude_post'=>'','author_post'=>'');
  $data=json_encode($rss_filter_setting);
  update_option('rss_filter_setting',$data); 
 }
