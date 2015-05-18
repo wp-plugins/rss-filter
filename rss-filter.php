@@ -3,7 +3,7 @@
 Plugin Name: RSS Filter 
 Plugin URI: http://wordpress.org/extend/plugins/rss-filter/
 Description: RSS Filter plugin .You have option to customization your WordPress RSS feed items.
-Version: 1.1
+Version: 1.2
 Author: Shambhu Prasad Patnaik
 Author URI:http://socialcms.wordpress.com/
 */
@@ -144,7 +144,7 @@ function myFeedExcluder($query) {
   $setting_data = (array) json_decode(get_option('rss_filter_setting'));
   $exclude_category = explode(",",$setting_data['exclude_category']);
   $exclude_post = explode(",",$setting_data['exclude_post']);
-  $author_post = explode(",",$setting_data['author_post']);  
+  $author_post = ($setting_data['author_post']!='')?explode(",",$setting_data['author_post']):'';  
   $show_sticky = $setting_data['show_sticky'];
 
    if(count($exclude_category)>0)
@@ -153,7 +153,7 @@ function myFeedExcluder($query) {
    $query->set('post__not_in',$exclude_post);
    if($show_sticky=='yes')
    $query->set('post__in',get_option( 'sticky_posts' ));
-   if($author_post!='')
+   if($author_post!='' &&  count($author_post)>0)
    $query->set('author__in',$author_post);
    //print_r($query);die();
  }
